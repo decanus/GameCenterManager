@@ -7,19 +7,38 @@
 //
 
 import UIKit
+import GameKit
 
 class ViewController: UIViewController {
 
+    var gameCenterManager: GameCenterManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        gameCenterManager = GameCenterManager()
+        gameCenterManager.delegate = self
+        gameCenterManager.authenticatePlayer()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
+extension ViewController: GameCenterManagerDelegate {
+
+    func gameCenterManager(_ gameCenterManager: GameCenterManager, presentViewController viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+
+    func gameCenterManager(_ gameCenterManager: GameCenterManager, localPlayerCouldNotBeAuthenticated error: Error) {
+        print("\(error)")
+    }
+
+    func gameCenterManager(_ gameCenterManager: GameCenterManager, localPlayerIsAuthenticated localPlayer: GKLocalPlayer) {
+
+    }
+
+}

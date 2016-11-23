@@ -23,7 +23,6 @@ class GameCenterManager {
     weak var delegate: GameCenterManagerDelegate?
 
     func authenticatePlayer() {
-
         GKLocalPlayer.localPlayer().authenticateHandler = { (viewController, error) in
 
             if GKLocalPlayer.localPlayer().isAuthenticated {
